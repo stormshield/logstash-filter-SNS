@@ -17,8 +17,8 @@ describe LogStash::Filters::SNS do
     	"Agg0" => "in,963446,40909184,2803352,918612032"
     ) do
       expect(subject.get('CPU_Userland')).to eq(10)
-      expect(subject.get('CPU_Interrupt')).to eq(20)
-      expect(subject.get('CPU_Kernel')).to eq(30)
+      expect(subject.get('CPU_Kernel')).to eq(20)
+      expect(subject.get('CPU_Interrupt')).to eq(30)
       expect(subject.get('CPU')).to be_nil
 
       expect(subject.get('[Ethernet0][name]')).to eq('out')

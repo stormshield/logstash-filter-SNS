@@ -25,8 +25,8 @@ class LogStash::Filters::SNS < LogStash::Filters::Base
 		values = event.get('CPU').split(',')
     event.remove('CPU')
 		event.set('CPU_Userland', values[0].to_i)
-		event.set('CPU_Interrupt', values[1].to_i)
-		event.set('CPU_Kernel', values[2].to_i)
+		event.set('CPU_Kernel', values[1].to_i)
+		event.set('CPU_Interrupt', values[2].to_i)
     end
 
     #PVM
