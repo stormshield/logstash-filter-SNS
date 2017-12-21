@@ -46,16 +46,21 @@ class LogStash::Filters::SNS < LogStash::Filters::Base
 		event.set('[Pvm][info_host]',     values[10].to_i)
     end
 
-    #EthernetX
-    interfaces = event.to_hash.select { |key| key.to_s.match(/^(ethernet|vlan|wlan|sslvpn|qid|ipsec|agg)\d*$/i) }.keys
+    #aggXX, ethernetXX, ipsecXX, qidXX, sslvpnXX, vlanXX, wifiXX, wlanXX, wldevXX
+    interfaces = event.to_hash.select { |key| key.to_s.match(/^(agg|ethernet|ipsec|qid|sslvpn|vlan|wifi|wlan|wldev)\d*$/i) }.keys
     interfaces.each do |iface|
       values = event.get(iface).split(',')
       event.remove(iface)
-      event.set("[#{iface}][name]",        values[0])
-      event.set("[#{iface}][ingress]",     values[1].to_i)
-      event.set("[#{iface}][ingress_max]", values[2].to_i)
-      event.set("[#{iface}][egress]",      values[3].to_i)
-      event.set("[#{iface}][egress_max]",  values[4].to_i)
+      event.set("[#{iface}][name]",          values[0])
+      event.set("[#{iface}][ingress]",       values[1].to_i)
+      event.set("[#{iface}][ingress_max]",   values[2].to_i)
+      event.set("[#{iface}][egress]",        values[3].to_i)
+      event.set("[#{iface}][egress_max]",    values[4].to_i)
+      # For SNS > 3.x, interfaces have 7 values
+      if values.size > 5
+        event.set("[#{iface}][packet_accept]", values[5].to_i)
+        event.set("[#{iface}][packet_block]",  values[6].to_i)
+      end
     end
 
     # filter_matched should go in the last line of our successful code
