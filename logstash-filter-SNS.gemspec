@@ -1,12 +1,12 @@
 Gem::Specification.new do |s|
   s.name = 'logstash-filter-SNS'
   s.version = '1.1.1'
-  s.licenses = ['Stormshield']
+  s.licenses = ['Apache License (2.0)']
   s.summary = "This filter transforms l_monitor statistics."
   s.description = "This gem is a logstash plugin required to be installed on top of the Logstash core pipeline using $LS_HOME/bin/plugin install gemname. This gem is not a stand-alone program"
   s.authors = ["Stormshield"]
   s.email = 'svc@stormshield.eu'
-  s.homepage = "http://www.stormshield.eu"
+  s.homepage = "https://www.stormshield.eu"
   s.require_paths = ["lib"]
 
   # Files
